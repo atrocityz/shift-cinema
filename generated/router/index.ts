@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './../../src/routes/__root'
 import { Route as IndexRouteImport } from './../../src/routes/index'
 import { Route as TicketsIndexRouteImport } from './../../src/routes/tickets/index'
 import { Route as ProfileIndexRouteImport } from './../../src/routes/profile/index'
+import { Route as FilmsFilmIdRouteImport } from './../../src/routes/films/$filmId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,33 +29,42 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   path: '/profile/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FilmsFilmIdRoute = FilmsFilmIdRouteImport.update({
+  id: '/films/$filmId',
+  path: '/films/$filmId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/films/$filmId': typeof FilmsFilmIdRoute
   '/profile/': typeof ProfileIndexRoute
   '/tickets/': typeof TicketsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/films/$filmId': typeof FilmsFilmIdRoute
   '/profile': typeof ProfileIndexRoute
   '/tickets': typeof TicketsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/films/$filmId': typeof FilmsFilmIdRoute
   '/profile/': typeof ProfileIndexRoute
   '/tickets/': typeof TicketsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/profile/' | '/tickets/'
+  fullPaths: '/' | '/films/$filmId' | '/profile/' | '/tickets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/profile' | '/tickets'
-  id: '__root__' | '/' | '/profile/' | '/tickets/'
+  to: '/' | '/films/$filmId' | '/profile' | '/tickets'
+  id: '__root__' | '/' | '/films/$filmId' | '/profile/' | '/tickets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FilmsFilmIdRoute: typeof FilmsFilmIdRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   TicketsIndexRoute: typeof TicketsIndexRoute
 }
@@ -82,11 +92,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/films/$filmId': {
+      id: '/films/$filmId'
+      path: '/films/$filmId'
+      fullPath: '/films/$filmId'
+      preLoaderRoute: typeof FilmsFilmIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FilmsFilmIdRoute: FilmsFilmIdRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   TicketsIndexRoute: TicketsIndexRoute,
 }
