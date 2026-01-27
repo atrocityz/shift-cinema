@@ -5,6 +5,8 @@ import { routeTree } from '../generated/router'
 import { ThemeProvider } from './utils/contexts/theme'
 import { queryClient } from './utils/lib'
 
+import './assets/styles/index.css'
+
 const router = createRouter({
   routeTree,
   context: { queryClient },
