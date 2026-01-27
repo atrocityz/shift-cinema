@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+
+@import './fonts.css';
+
+@theme {
+  --font-sans:
+    'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
