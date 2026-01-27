@@ -13,7 +13,7 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => (
   <div className="flex min-h-dvh flex-col">
-    <header className="hidden border-b py-6 sm:block">
+    <header className="hidden border-b border-gray-400 py-6 sm:block dark:border-gray-400/30">
       <div className="container flex items-center gap-6">
         <Link aria-label="Главная" className="shrink-0" title="Главная" to="/">
           <img alt="ШИФТ Cinema" height={34} src="/logo.svg" width={118} />
