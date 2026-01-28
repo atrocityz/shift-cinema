@@ -2,13 +2,15 @@ import type { ComponentProps } from 'react'
 
 import { Link } from '@tanstack/react-router'
 
+import type { Film } from '@/generated/api'
+
 import { kinopoiskRatingToStarsRating } from '@/utils/helpers'
 
-import { Button } from './Button'
-import { StarRating } from './StarRating'
+import { Button } from '../../components/ui/Button'
+import { StarRating } from '../../components/ui/StarRating'
 
 interface FilmCardListItemProps extends ComponentProps<'li'> {
-  film: any
+  film: Film
 }
 
 export const FilmCardListItem = ({ film, ...props }: FilmCardListItemProps) => (
@@ -28,7 +30,9 @@ export const FilmCardListItem = ({ film, ...props }: FilmCardListItemProps) => (
       </div>
       <div>
         <StarRating
-          rating={kinopoiskRatingToStarsRating(film.userRatings.kinopoisk)}
+          rating={kinopoiskRatingToStarsRating(
+            Number(film.userRatings.kinopoisk),
+          )}
         />
         <span>Кинопоиск - {film.userRatings.kinopoisk}</span>
       </div>

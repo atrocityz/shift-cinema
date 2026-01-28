@@ -1,8 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Loader } from 'lucide-react'
 
-import { FilmCardListItem } from '@/components/ui'
-
+import { FilmCardListItem } from './-components/FilmCardListItem'
 import { useMainPage } from './-hooks/useMainPage'
 
 const MainPage = () => {
