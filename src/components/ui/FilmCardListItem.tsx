@@ -19,7 +19,7 @@ export const FilmCardListItem = ({ film, ...props }: FilmCardListItemProps) => (
     <img
       alt=""
       className="h-130 rounded-lg object-cover"
-      src={import.meta.env.VITE_API_URL + film.img}
+      src={`${import.meta.env.VITE_BASE_API_URL}/api/${film.img}`}
     />
     <div className="z-10 flex flex-col gap-4 px-2">
       <div className="flex flex-col">
