@@ -9,16 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './../../src/routes/__root'
-import { Route as IndexRouteImport } from './../../src/routes/index'
 import { Route as TicketsIndexRouteImport } from './../../src/routes/tickets/index'
 import { Route as ProfileIndexRouteImport } from './../../src/routes/profile/index'
+import { Route as indexIndexRouteImport } from './../../src/routes/(index)/index'
 import { Route as FilmsFilmIdRouteImport } from './../../src/routes/films/$filmId'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TicketsIndexRoute = TicketsIndexRouteImport.update({
   id: '/tickets/',
   path: '/tickets/',
@@ -29,6 +24,11 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   path: '/profile/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const indexIndexRoute = indexIndexRouteImport.update({
+  id: '/(index)/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FilmsFilmIdRoute = FilmsFilmIdRouteImport.update({
   id: '/films/$filmId',
   path: '/films/$filmId',
@@ -36,48 +36,41 @@ const FilmsFilmIdRoute = FilmsFilmIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/films/$filmId': typeof FilmsFilmIdRoute
+  '/': typeof indexIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/tickets/': typeof TicketsIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/films/$filmId': typeof FilmsFilmIdRoute
+  '/': typeof indexIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/tickets': typeof TicketsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/films/$filmId': typeof FilmsFilmIdRoute
+  '/(index)/': typeof indexIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/tickets/': typeof TicketsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/films/$filmId' | '/profile/' | '/tickets/'
+  fullPaths: '/films/$filmId' | '/' | '/profile/' | '/tickets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/films/$filmId' | '/profile' | '/tickets'
-  id: '__root__' | '/' | '/films/$filmId' | '/profile/' | '/tickets/'
+  to: '/films/$filmId' | '/' | '/profile' | '/tickets'
+  id: '__root__' | '/films/$filmId' | '/(index)/' | '/profile/' | '/tickets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   FilmsFilmIdRoute: typeof FilmsFilmIdRoute
+  indexIndexRoute: typeof indexIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   TicketsIndexRoute: typeof TicketsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tickets/': {
       id: '/tickets/'
       path: '/tickets'
@@ -92,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(index)/': {
+      id: '/(index)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof indexIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/films/$filmId': {
       id: '/films/$filmId'
       path: '/films/$filmId'
@@ -103,8 +103,8 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   FilmsFilmIdRoute: FilmsFilmIdRoute,
+  indexIndexRoute: indexIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   TicketsIndexRoute: TicketsIndexRoute,
 }

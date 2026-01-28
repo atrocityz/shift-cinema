@@ -4,10 +4,8 @@ import { Link } from '@tanstack/react-router'
 
 import type { Film } from '@/generated/api'
 
+import { Button, StarRating } from '@/components/ui'
 import { kinopoiskRatingToStarsRating } from '@/utils/helpers'
-
-import { Button } from '../../components/ui/Button'
-import { StarRating } from '../../components/ui/StarRating'
 
 interface FilmCardListItemProps extends ComponentProps<'li'> {
   film: Film
