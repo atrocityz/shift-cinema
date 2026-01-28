@@ -1030,20 +1030,6 @@ export interface Car {
    */
   bodyType: 'cabriolet' | 'coupe' | 'hatchback' | 'sedan' | 'suv'
   /**
-   * Марка автомобиля
-   */
-  brand:
-    | 'Garden car'
-    | 'Geely'
-    | 'Grocery cart'
-    | 'Haier'
-    | 'Haval'
-    | 'Hyundai'
-    | 'Invalid'
-    | 'Kia'
-    | 'Mercedes'
-    | 'Volkswagen'
-  /**
    * Цвет автомобиля
    */
   color: 'black' | 'blue' | 'grey' | 'orange' | 'red' | 'silver' | 'white'
@@ -1072,6 +1058,20 @@ export interface Car {
    * Тип коробки передач
    */
   transmission: 'automatic' | 'manual'
+  /**
+   * Марка автомобиля
+   */
+  brand:
+    | 'Garden car'
+    | 'Geely'
+    | 'Grocery cart'
+    | 'Haier'
+    | 'Haval'
+    | 'Hyundai'
+    | 'Invalid'
+    | 'Kia'
+    | 'Mercedes'
+    | 'Volkswagen'
 }
 
 export interface PaginationMeta {
@@ -1129,20 +1129,6 @@ export interface CarWithRents {
    */
   bodyType: 'cabriolet' | 'coupe' | 'hatchback' | 'sedan' | 'suv'
   /**
-   * Марка автомобиля
-   */
-  brand:
-    | 'Garden car'
-    | 'Geely'
-    | 'Grocery cart'
-    | 'Haier'
-    | 'Haval'
-    | 'Hyundai'
-    | 'Invalid'
-    | 'Kia'
-    | 'Mercedes'
-    | 'Volkswagen'
-  /**
    * Цвет автомобиля
    */
   color: 'black' | 'blue' | 'grey' | 'orange' | 'red' | 'silver' | 'white'
@@ -1175,6 +1161,20 @@ export interface CarWithRents {
    * Тип коробки передач
    */
   transmission: 'automatic' | 'manual'
+  /**
+   * Марка автомобиля
+   */
+  brand:
+    | 'Garden car'
+    | 'Geely'
+    | 'Grocery cart'
+    | 'Haier'
+    | 'Haval'
+    | 'Hyundai'
+    | 'Invalid'
+    | 'Kia'
+    | 'Mercedes'
+    | 'Volkswagen'
 }
 
 export interface CarResponse {

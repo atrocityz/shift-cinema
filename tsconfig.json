@@ -3,12 +3,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/generated/*": ["./generated/*"],
-    },
+      "@/generated/*": ["./generated/*"]
+    }
   },
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.node.json" }
   ],
-  "files": [],
+  "files": []
 }
