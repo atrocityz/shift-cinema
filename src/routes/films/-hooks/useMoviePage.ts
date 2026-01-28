@@ -1,10 +1,20 @@
 import { useParams } from '@tanstack/react-router'
 
-import { useGetApiCinemaFilmByFilmIdQuery } from '@/generated/api'
+import {
+  useGetApiCinemaFilmByFilmIdQuery,
+  useGetApiCinemaFilmByFilmIdScheduleQuery,
+} from '@/generated/api'
 
 export const useMoviePage = () => {
   const { filmId } = useParams({ from: '/films/$filmId' })
   const filmQuery = useGetApiCinemaFilmByFilmIdQuery({
+    request: {
+      path: {
+        filmId,
+      },
+    },
+  })
+  const filmScheduleQuery = useGetApiCinemaFilmByFilmIdScheduleQuery({
     request: {
       path: {
         filmId,
@@ -20,7 +30,8 @@ export const useMoviePage = () => {
   return {
     state: {
       film: formattedFilm,
-      loading: filmQuery.isLoading,
+      schedules: filmScheduleQuery.data?.data.schedules,
+      loading: filmQuery.isLoading || filmScheduleQuery.isLoading,
     },
   }
 }
