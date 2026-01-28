@@ -1,7 +1,7 @@
-import { useGetFilmsQuery } from '@/utils/api/hooks'
+import { useGetApiCinemaFilmsQuery } from '@/generated/api'
 
 export const useMainPage = () => {
-  const filmsQuery = useGetFilmsQuery()
+  const filmsQuery = useGetApiCinemaFilmsQuery()
 
   return {
     state: {
