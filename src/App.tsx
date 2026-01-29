@@ -18,12 +18,10 @@ declare module '@tanstack/react-router' {
   }
 }
 
-export const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </QueryClientProvider>
-  )
-}
+export const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  </QueryClientProvider>
+)
