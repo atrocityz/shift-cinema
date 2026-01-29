@@ -325,6 +325,19 @@ export interface FilmResponse {
   success: boolean
 }
 
+export type PlaceType = 'BLOCKED' | 'COMFORT' | 'ECONOM'
+
+export interface Seat {
+  /**
+   * Цена места
+   */
+  price: number
+  /**
+   * Тип места
+   */
+  type: PlaceType
+}
+
 export interface FilmHall {
   /**
    * Название зала
@@ -333,7 +346,7 @@ export interface FilmHall {
   /**
    * Места в зале
    */
-  places: Array<Array<unknown>>
+  places: Array<Array<Seat>>
 }
 
 export interface FilmScheduleSeance {
