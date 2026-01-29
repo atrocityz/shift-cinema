@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 
-import type { FilmSchedule } from '@/generated/api'
+import type { FilmSchedule, FilmScheduleSeance } from '@/generated/api'
 
 import {
   Button,
@@ -9,19 +9,24 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui'
-import { formatDateToView } from '@/routes/films/-helpers/formatDateToView.ts'
+import { formatDateToView, translateHall } from '@/utils/helpers'
 import { cn } from '@/utils/lib'
 
-import { groupSeancesByHall } from '../-helpers/groupSeancesByHall'
-import { translateHall } from '../-helpers/translateHall'
+import { groupSeancesByHall } from '../-helpers'
 
 interface FilmSchedulesProps extends ComponentProps<'div'> {
   schedules: FilmSchedule[]
+  selectedDate?: FilmSchedule['date'] | null
+  selectedSeance?: FilmScheduleSeance | null
+  onTimeSelect: (date: FilmSchedule['date'], seance: FilmScheduleSeance) => void
 }
 
 export const FilmSchedules = ({
   schedules,
   className,
+  onTimeSelect,
+  selectedDate,
+  selectedSeance,
   ...props
 }: FilmSchedulesProps) => {
   return (
@@ -55,15 +60,29 @@ export const FilmSchedules = ({
                     зал
                   </h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    {seances.map((seance) => (
-                      <Button
-                        key={`${schedule.date}-${seance.hall.name}-${seance.time}`}
-                        className="min-w-18 px-4 py-2.5 text-sm"
-                        variant="outline"
-                      >
-                        {seance.time}
-                      </Button>
-                    ))}
+                    {seances.map((seance) => {
+                      const isButtonActive =
+                        selectedDate === schedule.date &&
+                        selectedSeance?.time === seance.time &&
+                        selectedSeance?.hall.name === seance.hall.name
+
+                      return (
+                        <Button
+                          key={`${schedule.date}-${seance.hall.name}-${seance.time}`}
+                          className={cn(
+                            'min-w-18 px-4 py-2.5 text-sm disabled:opacity-100',
+                            {
+                              'border-gray-500 bg-gray-500': isButtonActive,
+                            },
+                          )}
+                          disabled={isButtonActive}
+                          variant="outline"
+                          onClick={() => onTimeSelect(schedule.date, seance)}
+                        >
+                          {seance.time}
+                        </Button>
+                      )
+                    })}
                   </div>
                 </div>
               ))}

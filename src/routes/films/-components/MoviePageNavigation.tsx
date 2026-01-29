@@ -7,7 +7,7 @@ export const MoviePageNavigation = () => (
   <>
     <Button asChild className="md:hidden" variant="ghost">
       <Link
-        className="inline-flex w-full items-center justify-start gap-8 text-2xl font-bold"
+        className="inline-flex w-full items-center justify-start gap-8 px-0! pt-0 pb-3 text-2xl font-bold"
         to="/"
       >
         <X className="size-6" /> О фильме
