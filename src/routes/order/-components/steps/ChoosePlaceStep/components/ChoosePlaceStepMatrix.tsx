@@ -1,5 +1,5 @@
 import type { FilmHall } from '@/generated/api'
-import type { Place } from '@/utils/stores'
+import type { Place } from '@/routes/order/-contexts'
 
 import { cn } from '@/utils/lib'
 

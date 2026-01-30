@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 import { Button, CustomLoader } from '@/components/ui'
-import { filmQueryByIdOptions } from '@/utils/api/options'
-import { filmScheduleOptions } from '@/utils/api/options/filmSheduleQueryOptions'
+import { filmByIdQueryOptions, filmScheduleOptions } from '@/utils/api/options'
 import { cn } from '@/utils/lib'
 
 import { FilmCard } from '../-components/FilmCard'
@@ -10,7 +9,7 @@ import { FilmSchedules } from '../-components/FilmSchedule'
 import { useMoviePage } from '../-hooks'
 
 const FilmPage = () => {
-  const { state, stores, functions } = useMoviePage()
+  const { state, functions } = useMoviePage()
 
   return (
     <>
@@ -18,16 +17,21 @@ const FilmPage = () => {
       <div className="grid gap-12">
         <FilmSchedules
           schedules={state.schedules}
-          selectedDate={stores.orderStore.date}
-          selectedSeance={stores.orderStore.seance}
+          selectedDate={state.selectedDate}
+          selectedSeance={state.selectedSeance}
           onTimeSelect={functions.onTimeSelect}
         />
         <Button asChild>
           <Link
             className={cn('md:max-w-82', {
-              'pointer-events-none opacity-50': !stores.orderStore.seance,
+              'pointer-events-none opacity-50':
+                !state.selectedDate || !state.selectedSeance,
             })}
-            disabled={!stores.orderStore.seance}
+            search={{
+              filmId: state.film.id,
+              date: state.selectedDate ?? '',
+              seanceTime: state.selectedSeance?.time ?? '',
+            }}
             to="/order"
           >
             Продолжить
@@ -43,7 +47,7 @@ export const Route = createFileRoute('/films/_layout/$filmId')({
   loader: ({ context, params }) => {
     return Promise.all([
       context.queryClient.ensureQueryData(
-        filmQueryByIdOptions({
+        filmByIdQueryOptions({
           path: {
             filmId: params.filmId,
           },

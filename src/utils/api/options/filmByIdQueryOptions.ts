@@ -4,7 +4,7 @@ import type { GetApiCinemaFilmByFilmIdRequestParams } from '@/generated/api'
 
 import { getApiCinemaFilmByFilmId } from '@/generated/api'
 
-export const filmQueryByIdOptions = (
+export const filmByIdQueryOptions = (
   requestConfig: GetApiCinemaFilmByFilmIdRequestParams,
 ) =>
   queryOptions({

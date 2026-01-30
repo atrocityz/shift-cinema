@@ -11,9 +11,10 @@
 import { Route as rootRouteImport } from './../../src/routes/__root'
 import { Route as TicketsIndexRouteImport } from './../../src/routes/tickets/index'
 import { Route as ProfileIndexRouteImport } from './../../src/routes/profile/index'
-import { Route as OrderIndexRouteImport } from './../../src/routes/order/index'
+import { Route as OrderLayoutRouteImport } from './../../src/routes/order/_layout'
 import { Route as FilmsLayoutRouteImport } from './../../src/routes/films/_layout'
 import { Route as homeLayoutRouteImport } from './../../src/routes/(home)/_layout'
+import { Route as OrderLayoutIndexRouteImport } from './../../src/routes/order/_layout/index'
 import { Route as homeLayoutIndexRouteImport } from './../../src/routes/(home)/_layout/index'
 import { Route as FilmsLayoutFilmIdRouteImport } from './../../src/routes/films/_layout/$filmId'
 
@@ -27,9 +28,9 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   path: '/profile/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OrderIndexRoute = OrderIndexRouteImport.update({
-  id: '/order/',
-  path: '/order/',
+const OrderLayoutRoute = OrderLayoutRouteImport.update({
+  id: '/order/_layout',
+  path: '/order',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FilmsLayoutRoute = FilmsLayoutRouteImport.update({
@@ -40,6 +41,11 @@ const FilmsLayoutRoute = FilmsLayoutRouteImport.update({
 const homeLayoutRoute = homeLayoutRouteImport.update({
   id: '/(home)/_layout',
   getParentRoute: () => rootRouteImport,
+} as any)
+const OrderLayoutIndexRoute = OrderLayoutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrderLayoutRoute,
 } as any)
 const homeLayoutIndexRoute = homeLayoutIndexRouteImport.update({
   id: '/',
@@ -54,56 +60,60 @@ const FilmsLayoutFilmIdRoute = FilmsLayoutFilmIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/films': typeof FilmsLayoutRouteWithChildren
-  '/order/': typeof OrderIndexRoute
+  '/order': typeof OrderLayoutRouteWithChildren
   '/profile/': typeof ProfileIndexRoute
   '/tickets/': typeof TicketsIndexRoute
   '/films/$filmId': typeof FilmsLayoutFilmIdRoute
   '/': typeof homeLayoutIndexRoute
+  '/order/': typeof OrderLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/films': typeof FilmsLayoutRouteWithChildren
-  '/order': typeof OrderIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/tickets': typeof TicketsIndexRoute
   '/films/$filmId': typeof FilmsLayoutFilmIdRoute
   '/': typeof homeLayoutIndexRoute
+  '/order': typeof OrderLayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(home)/_layout': typeof homeLayoutRouteWithChildren
   '/films/_layout': typeof FilmsLayoutRouteWithChildren
-  '/order/': typeof OrderIndexRoute
+  '/order/_layout': typeof OrderLayoutRouteWithChildren
   '/profile/': typeof ProfileIndexRoute
   '/tickets/': typeof TicketsIndexRoute
   '/films/_layout/$filmId': typeof FilmsLayoutFilmIdRoute
   '/(home)/_layout/': typeof homeLayoutIndexRoute
+  '/order/_layout/': typeof OrderLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/films'
-    | '/order/'
+    | '/order'
     | '/profile/'
     | '/tickets/'
     | '/films/$filmId'
     | '/'
+    | '/order/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/films' | '/order' | '/profile' | '/tickets' | '/films/$filmId' | '/'
+  to: '/films' | '/profile' | '/tickets' | '/films/$filmId' | '/' | '/order'
   id:
     | '__root__'
     | '/(home)/_layout'
     | '/films/_layout'
-    | '/order/'
+    | '/order/_layout'
     | '/profile/'
     | '/tickets/'
     | '/films/_layout/$filmId'
     | '/(home)/_layout/'
+    | '/order/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   homeLayoutRoute: typeof homeLayoutRouteWithChildren
   FilmsLayoutRoute: typeof FilmsLayoutRouteWithChildren
-  OrderIndexRoute: typeof OrderIndexRoute
+  OrderLayoutRoute: typeof OrderLayoutRouteWithChildren
   ProfileIndexRoute: typeof ProfileIndexRoute
   TicketsIndexRoute: typeof TicketsIndexRoute
 }
@@ -124,11 +134,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/order/': {
-      id: '/order/'
+    '/order/_layout': {
+      id: '/order/_layout'
       path: '/order'
-      fullPath: '/order/'
-      preLoaderRoute: typeof OrderIndexRouteImport
+      fullPath: '/order'
+      preLoaderRoute: typeof OrderLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/films/_layout': {
@@ -144,6 +154,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof homeLayoutRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/order/_layout/': {
+      id: '/order/_layout/'
+      path: '/'
+      fullPath: '/order/'
+      preLoaderRoute: typeof OrderLayoutIndexRouteImport
+      parentRoute: typeof OrderLayoutRoute
     }
     '/(home)/_layout/': {
       id: '/(home)/_layout/'
@@ -186,10 +203,22 @@ const FilmsLayoutRouteWithChildren = FilmsLayoutRoute._addFileChildren(
   FilmsLayoutRouteChildren,
 )
 
+interface OrderLayoutRouteChildren {
+  OrderLayoutIndexRoute: typeof OrderLayoutIndexRoute
+}
+
+const OrderLayoutRouteChildren: OrderLayoutRouteChildren = {
+  OrderLayoutIndexRoute: OrderLayoutIndexRoute,
+}
+
+const OrderLayoutRouteWithChildren = OrderLayoutRoute._addFileChildren(
+  OrderLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   homeLayoutRoute: homeLayoutRouteWithChildren,
   FilmsLayoutRoute: FilmsLayoutRouteWithChildren,
-  OrderIndexRoute: OrderIndexRoute,
+  OrderLayoutRoute: OrderLayoutRouteWithChildren,
   ProfileIndexRoute: ProfileIndexRoute,
   TicketsIndexRoute: TicketsIndexRoute,
 }

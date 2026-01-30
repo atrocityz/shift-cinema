@@ -1,16 +1,15 @@
-import { useOrderStore } from '@/utils/stores'
-
+import { useOrder } from '../../-contexts'
 import { StepInfo } from '../StepInfo'
 
 export const ProfileDataStep = () => {
-  const orderStore = useOrderStore()
+  const { setStep } = useOrder()
 
   return (
     <>
       <StepInfo
         step={2}
         title="Введите ваши данные"
-        onBackClick={() => orderStore.setStep('choose-place')}
+        onBackClick={() => setStep('choose-place')}
       />
     </>
   )

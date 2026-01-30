@@ -1,38 +1,34 @@
 import { useRouter } from '@tanstack/react-router'
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { formatDateToView, translateHall } from '@/utils/helpers'
-import { useOrderStore } from '@/utils/stores'
 
+import { useOrder } from '../../../../-contexts'
 import { groupPlacesByRow } from '../helpers'
 
 export const useChoosePlaceStep = () => {
-  const orderStore = useOrderStore()
+  const orderContext = useOrder()
   const router = useRouter()
 
   const onBackButtonClick = () => router.history.back()
-  const onBuyButtonClick = () => orderStore.setStep('profile-data')
+  const onBuyButtonClick = () => orderContext.setStep('profile-data')
 
   const groupedPlaces = useMemo(
-    () => groupPlacesByRow(orderStore.places),
-    [orderStore.places],
+    () => groupPlacesByRow(orderContext.selectedPlaces),
+    [orderContext.selectedPlaces],
   )
-  const formattedDateAndTime = `${formatDateToView(orderStore.date!, 'longDayMonth')} ${orderStore.seance!.time}`
-
-  useEffect(() => {
-    orderStore.setPlaces([])
-  }, [])
+  const formattedDateAndTime = `${formatDateToView(orderContext.date, 'longDayMonth')} ${orderContext.seance.time}`
 
   return {
-    stores: {
-      orderStore,
+    contexts: {
+      orderContext,
     },
     state: {
       groupedPlacesByRow: groupedPlaces,
-      isPlacesEmpty: orderStore.places.length === 0,
-      totalPrice: orderStore.getTotalPrice(),
+      isPlacesEmpty: orderContext.selectedPlaces.length === 0,
+      totalPrice: orderContext.getTotalPrice(),
       formattedDateAndTime,
-      hallName: translateHall(orderStore.seance!.hall.name),
+      hallName: translateHall(orderContext.seance.hall.name),
     },
     functions: {
       onBackButtonClick,

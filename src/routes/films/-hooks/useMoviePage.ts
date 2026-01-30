@@ -1,15 +1,17 @@
 import { getRouteApi } from '@tanstack/react-router'
-import { useEffect } from 'react'
+import { useState } from 'react'
 
 import type { FilmSchedule, FilmScheduleSeance } from '@/generated/api'
-
-import { useOrderStore } from '@/utils/stores'
 
 const routeApi = getRouteApi('/films/_layout/$filmId')
 
 export const useMoviePage = () => {
   const { '0': filmResponse, '1': sheduleResponse } = routeApi.useLoaderData()
-  const orderStore = useOrderStore()
+  const [selectedDate, setSelectedDate] = useState<FilmSchedule['date'] | null>(
+    null,
+  )
+  const [selectedSeance, setSelectedSeance] =
+    useState<FilmScheduleSeance | null>(null)
 
   const formattedFilm = {
     ...filmResponse.data.film,
@@ -17,32 +19,19 @@ export const useMoviePage = () => {
   }
 
   const onTimeSelect = (
-    date: FilmSchedule['date'] | null,
-    seance: FilmScheduleSeance | null,
+    date: FilmSchedule['date'],
+    seance: FilmScheduleSeance,
   ) => {
-    orderStore.setDate(date)
-    orderStore.setSeance(seance)
-    orderStore.setFilm(formattedFilm || null)
-    orderStore.setStep('choose-place')
+    setSelectedDate(date)
+    setSelectedSeance(seance)
   }
 
-  useEffect(() => {
-    if (
-      formattedFilm &&
-      orderStore.film &&
-      formattedFilm.id !== orderStore.film.id
-    ) {
-      orderStore.clear()
-    }
-  }, [formattedFilm, orderStore.film])
-
   return {
-    stores: {
-      orderStore,
-    },
     state: {
       film: formattedFilm,
       schedules: sheduleResponse.data.schedules,
+      selectedDate,
+      selectedSeance,
     },
     functions: {
       onTimeSelect,

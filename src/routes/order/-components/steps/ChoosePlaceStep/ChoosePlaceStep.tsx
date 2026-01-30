@@ -6,7 +6,7 @@ import { ChoosePlaceStepMatrix } from './components/ChoosePlaceStepMatrix'
 import { useChoosePlaceStep } from './hooks'
 
 export const ChoosePlaceStep = () => {
-  const { state, stores, functions } = useChoosePlaceStep()
+  const { state, contexts, functions } = useChoosePlaceStep()
 
   return (
     <>
@@ -16,9 +16,9 @@ export const ChoosePlaceStep = () => {
         onBackClick={functions.onBackButtonClick}
       />
       <ChoosePlaceStepMatrix
-        hall={stores.orderStore.seance!.hall}
-        places={stores.orderStore.places}
-        togglePlace={stores.orderStore.togglePlace}
+        hall={contexts.orderContext.seance.hall}
+        places={contexts.orderContext.selectedPlaces}
+        togglePlace={contexts.orderContext.togglePlace}
       />
       <ChoosePlaceStepDetails
         dateAndTime={state.formattedDateAndTime}
