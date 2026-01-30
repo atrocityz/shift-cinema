@@ -16,7 +16,7 @@ const buttonVariants = cva(
           'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
           'border border-input text-black-800 dark:text-white-0 hover:text-purple-700 hover:border-purple-700 dark:hover:text-purple-700',
-        ghost: 'hover:text-primary',
+        ghost: 'hover:text-primary dark:hover:text-primary',
       },
       size: {
         default: 'px-[61px] py-4 has-[>svg]:px-3',

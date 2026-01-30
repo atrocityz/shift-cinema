@@ -15,7 +15,7 @@ export const MoviePageNavigation = () => (
     </Button>
     <Button
       asChild
-      className="hidden gap-4 py-6 font-medium text-gray-400 md:inline-flex"
+      className="hidden gap-4 py-6 font-medium text-gray-600 md:inline-flex dark:text-gray-400"
       variant="ghost"
     >
       <Link to="/">
