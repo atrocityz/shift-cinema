@@ -10,6 +10,8 @@ import './assets/styles/index.css'
 const router = createRouter({
   routeTree,
   context: { queryClient },
+  defaultPreloadStaleTime: 0,
+  scrollRestoration: true,
 })
 
 declare module '@tanstack/react-router' {
