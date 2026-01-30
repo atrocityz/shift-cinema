@@ -4,9 +4,9 @@ import { Button, CustomLoader } from '@/components/ui'
 import { filmByIdQueryOptions, filmScheduleOptions } from '@/utils/api/options'
 import { cn } from '@/utils/lib'
 
-import { FilmCard } from '../-components/FilmCard'
-import { FilmSchedules } from '../-components/FilmSchedule'
-import { useMoviePage } from '../-hooks'
+import { FilmCard } from './-components/FilmCard'
+import { FilmSchedules } from './-components/FilmSchedule'
+import { useMoviePage } from './-hooks'
 
 const FilmPage = () => {
   const { state, functions } = useMoviePage()

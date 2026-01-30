@@ -3,7 +3,7 @@ import { createFileRoute, getRouteApi } from '@tanstack/react-router'
 import { CustomLoader } from '@/components/ui'
 import { filmsQueryOptions } from '@/utils/api/options'
 
-import { FilmCardListItem } from '../-components/FilmCardListItem'
+import { FilmCardListItem } from './-components/FilmCardListItem'
 
 const routeApi = getRouteApi('/(home)/_layout/')
 

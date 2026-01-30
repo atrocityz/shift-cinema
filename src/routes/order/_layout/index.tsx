@@ -3,8 +3,8 @@ import { createFileRoute, getRouteApi, redirect } from '@tanstack/react-router'
 import { CustomLoader } from '@/components/ui'
 import { filmScheduleOptions } from '@/utils/api/options'
 
-import { StepsContainer } from '../-components/StepsContainer'
-import { OrderProvider } from '../-contexts'
+import { StepsContainer } from './-components/StepsContainer'
+import { OrderProvider } from './-contexts'
 
 const routeApi = getRouteApi('/order/_layout/')
 

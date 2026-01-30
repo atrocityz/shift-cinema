@@ -1,4 +1,4 @@
-import type { Place } from '@/routes/order/-contexts'
+import type { Place } from '@/routes/order/_layout/-contexts'
 
 interface ChoosePlaceStepDetailsProps {
   dateAndTime: string
