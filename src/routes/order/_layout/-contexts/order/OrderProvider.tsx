@@ -4,9 +4,9 @@ import { useMemo, useState } from 'react'
 
 import type { FilmScheduleSeance } from '@/generated/api'
 
-import type { Place, Step } from './OrderContext'
+import type { Place, Step } from './OrderContext.ts'
 
-import { OrderContext } from './OrderContext'
+import { OrderContext } from './OrderContext.ts'
 
 interface OrderProviderProps {
   children: ReactNode

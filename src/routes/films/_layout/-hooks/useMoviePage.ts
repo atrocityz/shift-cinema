@@ -6,7 +6,7 @@ import type { FilmSchedule, FilmScheduleSeance } from '@/generated/api'
 const routeApi = getRouteApi('/films/_layout/$filmId')
 
 export const useMoviePage = () => {
-  const { '0': filmResponse, '1': sheduleResponse } = routeApi.useLoaderData()
+  const [filmResponse, scheduleResponse] = routeApi.useLoaderData()
   const [selectedDate, setSelectedDate] = useState<FilmSchedule['date'] | null>(
     null,
   )
@@ -29,7 +29,7 @@ export const useMoviePage = () => {
   return {
     state: {
       film: formattedFilm,
-      schedules: sheduleResponse.data.schedules,
+      schedules: scheduleResponse.data.schedules,
       selectedDate,
       selectedSeance,
     },

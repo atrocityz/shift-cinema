@@ -22,12 +22,16 @@ const TicketsIndexRoute = TicketsIndexRouteImport.update({
   id: '/tickets/',
   path: '/tickets/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() =>
+  import('./../../src/routes/tickets/index.lazy').then((d) => d.Route),
+)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
   id: '/profile/',
   path: '/profile/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() =>
+  import('./../../src/routes/profile/index.lazy').then((d) => d.Route),
+)
 const OrderLayoutRoute = OrderLayoutRouteImport.update({
   id: '/order/_layout',
   path: '/order',
@@ -46,17 +50,25 @@ const OrderLayoutIndexRoute = OrderLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => OrderLayoutRoute,
-} as any)
-const homeLayoutIndexRoute = homeLayoutIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => homeLayoutRoute,
-} as any)
+} as any).lazy(() =>
+  import('./../../src/routes/order/_layout/index.lazy').then((d) => d.Route),
+)
+const homeLayoutIndexRoute = homeLayoutIndexRouteImport
+  .update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => homeLayoutRoute,
+  } as any)
+  .lazy(() =>
+    import('./../../src/routes/(home)/_layout/index.lazy').then((d) => d.Route),
+  )
 const FilmsLayoutFilmIdRoute = FilmsLayoutFilmIdRouteImport.update({
   id: '/$filmId',
   path: '/$filmId',
   getParentRoute: () => FilmsLayoutRoute,
-} as any)
+} as any).lazy(() =>
+  import('./../../src/routes/films/_layout/$filmId.lazy').then((d) => d.Route),
+)
 
 export interface FileRoutesByFullPath {
   '/films': typeof FilmsLayoutRouteWithChildren

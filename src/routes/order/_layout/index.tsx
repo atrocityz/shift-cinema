@@ -1,12 +1,7 @@
-import { createFileRoute, getRouteApi, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { CustomLoader } from '@/components/ui'
 import { filmScheduleOptions } from '@/utils/api/options'
-
-import { StepsContainer } from './-components/StepsContainer'
-import { OrderProvider } from './-contexts'
-
-const routeApi = getRouteApi('/order/_layout/')
 
 interface OrderSearch {
   date: string
@@ -14,19 +9,7 @@ interface OrderSearch {
   seanceTime: string
 }
 
-const OrderPage = () => {
-  const search = routeApi.useSearch()
-  const seance = routeApi.useLoaderData()
-
-  return (
-    <OrderProvider date={search.date} filmId={search.filmId} seance={seance}>
-      <StepsContainer />
-    </OrderProvider>
-  )
-}
-
 export const Route = createFileRoute('/order/_layout/')({
-  component: OrderPage,
   validateSearch: (search: Record<string, unknown>): OrderSearch => {
     const filmId = search.filmId as string
     const date = search.date as string

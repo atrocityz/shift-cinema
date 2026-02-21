@@ -32,7 +32,7 @@ export const FilmSchedules = ({
   <div className={cn('grid gap-6', className)} {...props}>
     <h2 className="hidden text-2xl font-bold md:block">Расписание</h2>
     <Tabs className="grid gap-6" defaultValue={schedules[0].date}>
-      <div className="-mx-4 w-[calc(100%+2rem)] overflow-x-auto px-4 md:mx-0 md:w-full md:px-0">
+      <div className="-mx-4 w-[calc(100%+2rem)] overflow-x-auto overflow-y-hidden px-4 md:mx-0 md:w-full md:px-0">
         <TabsList className="w-max min-w-full">
           {schedules.map((schedule) => (
             <TabsTrigger key={schedule.date} value={schedule.date}>
