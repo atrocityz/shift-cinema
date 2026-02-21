@@ -1,4 +1,4 @@
-import type { Place } from '@/routes/order/_layout/-contexts'
+import type { Place } from '@/routes/order/_layout/-contexts/order'
 
 export const groupPlacesByRow = (places: Place[]) =>
   places.reduce(

@@ -27,11 +27,11 @@ export const StepInfo = ({
       <ChevronLeft className="size-6" />
       <span aria-hidden>{title}</span>
     </Button>
-    <div className="grid gap-2">
-      <h3 className="text-sm">
+    <div className="flex flex-col gap-2">
+      <h2 className="text-sm">
         Шаг {step} из {maxSteps}
-      </h3>
-      <div className="relative h-1 w-full max-w-92 overflow-hidden rounded-4xl bg-gray-400">
+      </h2>
+      <div className="relative h-1 w-full overflow-hidden rounded-4xl bg-gray-400 md:max-w-92">
         <div
           className="absolute h-full rounded-4xl bg-green-400 transition-all duration-300"
           style={{ width: `${(step / maxSteps) * 100}%` }}

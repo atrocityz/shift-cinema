@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 
-import type { Step } from '../-contexts'
+import type { Step } from '../-contexts/order'
 
-import { useOrder } from '../-contexts'
+import { useOrder } from '../-contexts/order'
 import {
   ChoosePlaceStep,
   PaymentStep,
@@ -20,5 +20,5 @@ const component: Record<Step, ReactNode> = {
 export const StepsContainer = () => {
   const { step } = useOrder()
 
-  return <div className="grid gap-6">{component[step]}</div>
+  return component[step]
 }

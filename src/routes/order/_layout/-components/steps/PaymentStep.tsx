@@ -1,3 +1,3 @@
 export const PaymentStep = () => {
-  return <div>PaymentStep</div>
+  return <div className="flex flex-1 flex-col gap-6">PaymentStep</div>
 }

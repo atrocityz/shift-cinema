@@ -1,19 +1,19 @@
 import { createContext } from 'react'
 
-import type { FilmScheduleSeance } from '@/generated/api'
+import type { Film, FilmScheduleSeance } from '@/generated/api'
 
 export type Step = 'choose-place' | 'payment' | 'profile-data' | 'success'
 
 export interface Place {
   id: string
+  place: number
   price: number
   row: number
-  seat: number
 }
 
 interface OrderContextState {
   date: string
-  filmId: string
+  film: Film
   seance: FilmScheduleSeance
   selectedPlaces: Place[]
   step: Step
@@ -26,7 +26,7 @@ interface OrderContextState {
 
 const initialState: OrderContextState = {
   date: '',
-  filmId: '',
+  film: {} as Film,
   seance: {} as FilmScheduleSeance,
   selectedPlaces: [],
   step: 'choose-place',

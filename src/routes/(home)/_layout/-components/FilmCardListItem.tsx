@@ -23,7 +23,7 @@ export const FilmCardListItem = ({ film, ...props }: FilmCardListItemProps) => (
       src={`${import.meta.env.VITE_BASE_API_URL}/api/${film.img}`}
       width={308}
     />
-    <div className="z-10 flex flex-col gap-4 px-2">
+    <div className="z-10 flex max-w-fit flex-col gap-4 px-2">
       <div className="flex flex-col">
         <h2 className="text-[20px] font-semibold">{film.name}</h2>
         <span className="text-sm text-gray-500">{film.releaseDate}</span>

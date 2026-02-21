@@ -1,7 +1,8 @@
-import type { Place } from '@/routes/order/_layout/-contexts'
+import type { Place } from '@/routes/order/_layout/-contexts/order'
 
 interface ChoosePlaceStepDetailsProps {
   dateAndTime: string
+  filmName: string
   hallName: string
   isPlacesEmpty: boolean
   places: Record<number, Place[]>
@@ -14,8 +15,10 @@ export const ChoosePlaceStepDetails = ({
   places,
   totalPrice,
   isPlacesEmpty,
+  filmName,
 }: ChoosePlaceStepDetailsProps) => (
   <div className="grid gap-6">
+    <h3 className="text-xl md:hidden">{filmName}</h3>
     <div className="grid gap-0.5">
       <h3 className="text-sm text-gray-600 dark:text-gray-400">Зал</h3>
       <p>{hallName}</p>
@@ -29,7 +32,7 @@ export const ChoosePlaceStepDetails = ({
       {isPlacesEmpty && <p>Не выбраны</p>}
       {Object.entries(places).map(([row, places]) => (
         <div key={`row-${row}`}>
-          {row} ряд - {places.map((place) => place.seat).join(', ')}
+          {row} ряд - {places.map((place) => place.place).join(', ')}
         </div>
       ))}
     </div>

@@ -1,3 +1,3 @@
 export const SuccessStep = () => {
-  return <div>SuccessStep</div>
+  return <div className="flex flex-1 flex-col gap-6">SuccessStep</div>
 }

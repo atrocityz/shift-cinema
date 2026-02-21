@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 import { useMemo, useState } from 'react'
 
-import type { FilmScheduleSeance } from '@/generated/api'
+import type { Film, FilmScheduleSeance } from '@/generated/api'
 
 import type { Place, Step } from './OrderContext.ts'
 
@@ -11,12 +11,12 @@ import { OrderContext } from './OrderContext.ts'
 interface OrderProviderProps {
   children: ReactNode
   date: string
-  filmId: string
+  film: Film
   seance: FilmScheduleSeance
 }
 
 export const OrderProvider = ({
-  filmId,
+  film,
   date,
   seance,
   children,
@@ -41,7 +41,7 @@ export const OrderProvider = ({
 
   const value = useMemo(
     () => ({
-      filmId,
+      film,
       date,
       seance,
       selectedPlaces,
@@ -51,7 +51,7 @@ export const OrderProvider = ({
       togglePlace,
       getTotalPrice,
     }),
-    [filmId, date, seance, selectedPlaces, step],
+    [film, date, seance, selectedPlaces, step],
   )
 
   return <OrderContext value={value}>{children}</OrderContext>

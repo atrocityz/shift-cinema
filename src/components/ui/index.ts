@@ -1,4 +1,5 @@
 export * from './Button'
 export * from './CustomLoader'
+export * from './Select'
 export * from './StarRating'
 export * from './Tabs'
