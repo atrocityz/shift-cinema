@@ -1,14 +1,14 @@
+import { useRouter } from '@tanstack/react-router'
 import { useMemo } from 'react'
 
 import { formatDateToView, translateHall } from '@/utils/helpers'
 
 import { useOrder } from '../../../../../../-contexts/order'
-import { useChoosePlaceStepContext } from '../../../contexts/choosePlaceStep'
 import { groupPlacesByRow } from '../../../helpers'
 
 export const useChoosePlaceStepDesktopView = () => {
   const orderContext = useOrder()
-  const choosePlaceStepContext = useChoosePlaceStepContext()
+  const router = useRouter()
 
   const groupedPlacesByRow = useMemo(
     () => groupPlacesByRow(orderContext.selectedPlaces),
@@ -21,11 +21,11 @@ export const useChoosePlaceStepDesktopView = () => {
   )
   const totalPrice = orderContext.getTotalPrice()
   const onBuyButtonClick = () => orderContext.setStep('profile-data')
+  const onBackButtonClick = () => router.history.back()
 
   return {
     contexts: {
       orderContext,
-      choosePlaceStepContext,
     },
     state: {
       formattedDateAndTime,
@@ -36,6 +36,7 @@ export const useChoosePlaceStepDesktopView = () => {
     },
     functions: {
       onBuyButtonClick,
+      onBackButtonClick,
     },
   }
 }

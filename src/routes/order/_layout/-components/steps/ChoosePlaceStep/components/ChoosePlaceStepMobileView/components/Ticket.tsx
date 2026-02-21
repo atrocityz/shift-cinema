@@ -19,7 +19,7 @@ interface TicketProps extends ComponentProps<'div'> {
   allSelectedPlaces: Place[]
   number: number
   seats: Seat[][]
-  selectedPlace: Place
+  ticket: Place
   onRemove?: (id: string) => void
   onSelectChange: (id: string, place: Place) => void
 }
@@ -28,7 +28,7 @@ export const Ticket = ({
   allSelectedPlaces,
   number,
   seats,
-  selectedPlace,
+  ticket,
   onRemove,
   onSelectChange,
   ...props
@@ -42,11 +42,11 @@ export const Ticket = ({
 
       const placeId = `${newRow}-${index + 1}`
       const isSelectedInOtherTicket = allSelectedPlaces.some(
-        (p) =>
-          p.id === placeId &&
-          p.id !== selectedPlace.id &&
-          p.row > 0 &&
-          p.place > 0,
+        (place) =>
+          place.id === placeId &&
+          place.id !== ticket.id &&
+          place.row > 0 &&
+          place.place > 0,
       )
 
       return !isSelectedInOtherTicket
@@ -56,14 +56,14 @@ export const Ticket = ({
       const newPlace = firstAvailableSeatIndex + 1
       const newPrice = rowSeats[firstAvailableSeatIndex].price
 
-      onSelectChange(selectedPlace.id, {
+      onSelectChange(ticket.id, {
         id: `${newRow}-${newPlace}`,
         row: Number(newRow),
         place: newPlace,
         price: newPrice,
       })
     } else {
-      onSelectChange(selectedPlace.id, {
+      onSelectChange(ticket.id, {
         id: `${newRow}-0`,
         row: Number(newRow),
         place: 0,
@@ -74,11 +74,11 @@ export const Ticket = ({
 
   const onPlaceChange = (newPlace: string) => {
     const placeIndex = Number(newPlace) - 1
-    const newPrice = seats[selectedPlace.row - 1][placeIndex].price
+    const newPrice = seats[ticket.row - 1][placeIndex].price
 
-    onSelectChange(selectedPlace.id, {
-      id: `${selectedPlace.row}-${newPlace}`,
-      row: selectedPlace.row,
+    onSelectChange(ticket.id, {
+      ...ticket,
+      id: `${ticket.row}-${newPlace}`,
       place: Number(newPlace),
       price: newPrice,
     })
@@ -91,11 +91,11 @@ export const Ticket = ({
     const placeId = `${row}-${placeIndex + 1}`
 
     return allSelectedPlaces.some(
-      (p) =>
-        p.id === placeId &&
-        p.id !== selectedPlace.id &&
-        p.row > 0 &&
-        p.place > 0,
+      (place) =>
+        place.id === placeId &&
+        place.id !== ticket.id &&
+        place.row > 0 &&
+        place.place > 0,
     )
   }
 
@@ -104,10 +104,9 @@ export const Ticket = ({
     return seats[row - 1].some((_, index) => !isPlaceDisabled(row, index))
   }
 
-  const isRowSelected = selectedPlace.row > 0
-  const isPlaceSelected = selectedPlace.place > 0
-  const hasPlacesInSelectedRow =
-    isRowSelected && hasAvailablePlaces(selectedPlace.row)
+  const isRowSelected = ticket.row > 0
+  const isPlaceSelected = ticket.place > 0
+  const hasPlacesInSelectedRow = isRowSelected && hasAvailablePlaces(ticket.row)
 
   return (
     <div className="grid gap-4" {...props}>
@@ -117,7 +116,7 @@ export const Ticket = ({
           <Button
             size="icon"
             variant="ghost"
-            onClick={() => onRemove(selectedPlace.id)}
+            onClick={() => onRemove(ticket.id)}
           >
             <Trash className="size-4" />
           </Button>
@@ -127,7 +126,7 @@ export const Ticket = ({
         <div className="grid gap-1.5">
           <h4 className="text-sm">Ряд</h4>
           <Select
-            value={isRowSelected ? String(selectedPlace.row) : undefined}
+            value={isRowSelected ? String(ticket.row) : undefined}
             onValueChange={onRowChange}
           >
             <SelectTrigger className="w-full">
@@ -154,7 +153,7 @@ export const Ticket = ({
           <h4 className="text-sm">Место</h4>
           <Select
             disabled={!isRowSelected || !hasPlacesInSelectedRow}
-            value={isPlaceSelected ? String(selectedPlace.place) : undefined}
+            value={isPlaceSelected ? String(ticket.place) : undefined}
             onValueChange={onPlaceChange}
           >
             <SelectTrigger className="w-full">
@@ -169,12 +168,12 @@ export const Ticket = ({
             <SelectContent>
               <SelectGroup>
                 {isRowSelected &&
-                  seats[selectedPlace.row - 1].map((_, index) => {
+                  seats[ticket.row - 1].map((_, index) => {
                     const placeNumber = index + 1
                     return (
                       <SelectItem
-                        key={`seat-${selectedPlace.row}-${placeNumber}`}
-                        disabled={isPlaceDisabled(selectedPlace.row, index)}
+                        key={`seat-${ticket.row}-${placeNumber}`}
+                        disabled={isPlaceDisabled(ticket.row, index)}
                         value={String(placeNumber)}
                       >
                         {placeNumber}

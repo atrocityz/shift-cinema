@@ -13,7 +13,7 @@ export const ChoosePlaceStepDesktopView = () => {
       <StepInfo
         step={1}
         title="Выбор места"
-        onBackClick={contexts.choosePlaceStepContext.onBackButtonClick}
+        onBackClick={functions.onBackButtonClick}
       />
       <ChoosePlaceStepMatrix
         hall={contexts.orderContext.seance.hall}
@@ -32,7 +32,7 @@ export const ChoosePlaceStepDesktopView = () => {
         <Button
           className="hidden md:inline-flex"
           variant="outline"
-          onClick={contexts.choosePlaceStepContext.onBackButtonClick}
+          onClick={functions.onBackButtonClick}
         >
           Назад
         </Button>

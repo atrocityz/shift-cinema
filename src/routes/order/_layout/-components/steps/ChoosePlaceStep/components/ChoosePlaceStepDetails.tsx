@@ -4,7 +4,7 @@ interface ChoosePlaceStepDetailsProps {
   dateAndTime: string
   filmName: string
   hallName: string
-  isPlacesEmpty: boolean
+  isPlacesEmpty?: boolean
   places: Record<number, Place[]>
   totalPrice: number
 }

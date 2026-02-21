@@ -10,21 +10,23 @@ export const ChoosePlaceStepMobileView = () => {
 
   return (
     <div className="flex flex-1 flex-col gap-6 md:hidden">
-      <StepInfo step={1} title="Выбор места" onBackClick={functions.goBack} />
+      <StepInfo
+        step={1}
+        title="Выбор места"
+        onBackClick={functions.onBackButtonClick}
+      />
       {!state.showMobileDetails ? (
         <>
           <div className="grid gap-10">
-            {state.displayedPlaces.map((seat, index) => (
+            {state.tickets.map((ticket, index) => (
               <Ticket
-                key={seat.id}
+                key={ticket.id}
                 allSelectedPlaces={contexts.orderContext.selectedPlaces}
                 number={index + 1}
                 seats={contexts.orderContext.seance.hall.places}
-                selectedPlace={seat}
+                ticket={ticket}
                 onRemove={
-                  state.displayedPlaces.length > 1
-                    ? functions.removeTicket
-                    : undefined
+                  state.tickets.length > 1 ? functions.removeTicket : undefined
                 }
                 onSelectChange={functions.onSelectChange}
               />
@@ -39,7 +41,7 @@ export const ChoosePlaceStepMobileView = () => {
           </Button>
           <Button
             className="mt-auto"
-            disabled={state.isPlacesEmpty || state.hasEmptyTickets}
+            disabled={state.hasEmptyTickets}
             onClick={functions.onContinueClick}
           >
             Продолжить
@@ -51,15 +53,10 @@ export const ChoosePlaceStepMobileView = () => {
             dateAndTime={state.formattedDateAndTime}
             filmName={contexts.orderContext.film.name}
             hallName={state.hallName}
-            isPlacesEmpty={state.isPlacesEmpty}
             places={state.groupedPlacesByRow}
-            totalPrice={state.totalPrice}
+            totalPrice={contexts.orderContext.getTotalPrice()}
           />
-          <Button
-            className="mt-auto"
-            disabled={state.isPlacesEmpty}
-            onClick={functions.onBuyButtonClick}
-          >
+          <Button className="mt-auto" onClick={functions.onBuyButtonClick}>
             Купить
           </Button>
         </>
