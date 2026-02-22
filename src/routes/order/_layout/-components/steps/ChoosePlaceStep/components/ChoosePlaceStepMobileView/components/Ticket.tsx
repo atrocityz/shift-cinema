@@ -168,7 +168,7 @@ export const Ticket = ({
             <SelectContent>
               <SelectGroup>
                 {isRowSelected &&
-                  seats[ticket.row - 1].map((_, index) => {
+                  seats[ticket.row - 1].map((place, index) => {
                     const placeNumber = index + 1
                     return (
                       <SelectItem
@@ -176,7 +176,9 @@ export const Ticket = ({
                         disabled={isPlaceDisabled(ticket.row, index)}
                         value={String(placeNumber)}
                       >
-                        {placeNumber}
+                        {place.price
+                          ? `${placeNumber} - ${place.price}руб`
+                          : placeNumber}
                       </SelectItem>
                     )
                   })}
