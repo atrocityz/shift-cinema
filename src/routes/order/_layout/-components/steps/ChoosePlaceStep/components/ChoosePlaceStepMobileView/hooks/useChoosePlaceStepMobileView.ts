@@ -24,9 +24,9 @@ export const useChoosePlaceStepMobileView = () => {
   const router = useRouter()
 
   const [showMobileDetails, setShowMobileDetails] = useState(false)
-  const [emptyTickets, setEmptyTickets] = useState<Place[]>(() => [
-    createEmptyTicket(),
-  ])
+  const [emptyTickets, setEmptyTickets] = useState<Place[]>(() =>
+    orderContext.selectedPlaces.length ? [] : [createEmptyTicket()],
+  )
 
   const tickets = useMemo(
     () =>

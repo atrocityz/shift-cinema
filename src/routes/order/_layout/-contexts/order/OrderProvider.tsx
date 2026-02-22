@@ -2,7 +2,11 @@ import type { ReactNode } from 'react'
 
 import { useCallback, useMemo, useState } from 'react'
 
-import type { Film, FilmScheduleSeance } from '@/generated/api'
+import type {
+  CreatePaymentPersonDto,
+  Film,
+  FilmScheduleSeance,
+} from '@/generated/api'
 
 import type { Place, Step } from './OrderContext.ts'
 
@@ -23,6 +27,7 @@ export const OrderProvider = ({
 }: OrderProviderProps) => {
   const [selectedPlaces, setSelectedPlaces] = useState<Place[]>([])
   const [step, setStep] = useState<Step>('choose-place')
+  const [person, setPerson] = useState({} as CreatePaymentPersonDto)
 
   const togglePlace = useCallback((place: Place) => {
     setSelectedPlaces((current) => {
@@ -49,6 +54,8 @@ export const OrderProvider = ({
       setSelectedPlaces,
       togglePlace,
       totalPrice,
+      person,
+      setPerson,
     }),
     [film, date, seance, selectedPlaces, step],
   )
