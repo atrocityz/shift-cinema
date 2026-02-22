@@ -54,7 +54,7 @@ export const ChoosePlaceStepMobileView = () => {
             filmName={contexts.orderContext.film.name}
             hallName={state.hallName}
             places={state.groupedPlacesByRow}
-            totalPrice={contexts.orderContext.getTotalPrice()}
+            totalPrice={contexts.orderContext.totalPrice}
           />
           <Button className="mt-auto" onClick={functions.onBuyButtonClick}>
             Купить

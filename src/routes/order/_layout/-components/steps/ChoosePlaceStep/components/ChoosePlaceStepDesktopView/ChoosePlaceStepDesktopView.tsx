@@ -16,8 +16,8 @@ export const ChoosePlaceStepDesktopView = () => {
         onBackClick={functions.onBackButtonClick}
       />
       <ChoosePlaceStepMatrix
-        hall={contexts.orderContext.seance.hall}
-        places={contexts.orderContext.selectedPlaces}
+        places={contexts.orderContext.seance.hall.places}
+        selectedPlaces={contexts.orderContext.selectedPlaces}
         togglePlace={contexts.orderContext.togglePlace}
       />
       <ChoosePlaceStepDetails
@@ -26,7 +26,7 @@ export const ChoosePlaceStepDesktopView = () => {
         hallName={state.hallName}
         isPlacesEmpty={state.isPlacesEmpty}
         places={state.groupedPlacesByRow}
-        totalPrice={state.totalPrice}
+        totalPrice={contexts.orderContext.totalPrice}
       />
       <div className="flex items-center gap-6 py-4">
         <Button

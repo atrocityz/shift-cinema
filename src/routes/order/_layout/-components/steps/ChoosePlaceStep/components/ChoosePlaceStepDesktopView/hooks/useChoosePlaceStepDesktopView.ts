@@ -1,9 +1,9 @@
 import { useRouter } from '@tanstack/react-router'
 import { useMemo } from 'react'
 
+import { useOrder } from '@/routes/order/_layout/-contexts/order'
 import { formatDateToView, translateHall } from '@/utils/helpers'
 
-import { useOrder } from '../../../../../../-contexts/order'
 import { groupPlacesByRow } from '../../../helpers'
 
 export const useChoosePlaceStepDesktopView = () => {
@@ -19,7 +19,6 @@ export const useChoosePlaceStepDesktopView = () => {
   const isPlacesEmpty = !orderContext.selectedPlaces.some(
     (place) => place.row > 0 && place.place > 0,
   )
-  const totalPrice = orderContext.getTotalPrice()
   const onBuyButtonClick = () => orderContext.setStep('profile-data')
   const onBackButtonClick = () => router.history.back()
 
@@ -32,7 +31,6 @@ export const useChoosePlaceStepDesktopView = () => {
       groupedPlacesByRow,
       hallName,
       isPlacesEmpty,
-      totalPrice,
     },
     functions: {
       onBuyButtonClick,

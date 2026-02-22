@@ -17,8 +17,8 @@ interface OrderContextState {
   seance: FilmScheduleSeance
   selectedPlaces: Place[]
   step: Step
+  totalPrice: number
 
-  getTotalPrice: () => number
   setSelectedPlaces: (places: Place[]) => void
   setStep: (step: Step) => void
   togglePlace: (place: Place) => void
@@ -30,8 +30,8 @@ const initialState: OrderContextState = {
   seance: {} as FilmScheduleSeance,
   selectedPlaces: [],
   step: 'choose-place',
+  totalPrice: 0,
 
-  getTotalPrice: () => 0,
   setSelectedPlaces: () => {},
   setStep: () => {},
   togglePlace: () => {},

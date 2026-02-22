@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import type { Film, FilmScheduleSeance } from '@/generated/api'
 
@@ -24,20 +24,19 @@ export const OrderProvider = ({
   const [selectedPlaces, setSelectedPlaces] = useState<Place[]>([])
   const [step, setStep] = useState<Step>('choose-place')
 
-  const togglePlace = (place: Place) => {
-    setSelectedPlaces((prev) => {
-      const isAlreadyAdded = prev.find((p) => p.id === place.id)
+  const togglePlace = useCallback((place: Place) => {
+    setSelectedPlaces((current) => {
+      const isAlreadyAdded = current.find((p) => p.id === place.id)
 
       if (isAlreadyAdded) {
-        return prev.filter((p) => p.id !== place.id)
+        return current.filter((p) => p.id !== place.id)
       }
 
-      return [...prev, place]
+      return [...current, place]
     })
-  }
+  }, [])
 
-  const getTotalPrice = () =>
-    selectedPlaces.reduce((acc, place) => acc + place.price, 0)
+  const totalPrice = selectedPlaces.reduce((acc, place) => acc + place.price, 0)
 
   const value = useMemo(
     () => ({
@@ -49,7 +48,7 @@ export const OrderProvider = ({
       setStep,
       setSelectedPlaces,
       togglePlace,
-      getTotalPrice,
+      totalPrice,
     }),
     [film, date, seance, selectedPlaces, step],
   )
