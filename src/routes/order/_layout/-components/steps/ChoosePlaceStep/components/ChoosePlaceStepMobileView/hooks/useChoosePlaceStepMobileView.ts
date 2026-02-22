@@ -24,11 +24,26 @@ export const useChoosePlaceStepMobileView = () => {
   const router = useRouter()
 
   const [showMobileDetails, setShowMobileDetails] = useState(false)
-  const [tickets, setTickets] = useState<Place[]>(() => [createEmptyTicket()])
+  const [emptyTickets, setEmptyTickets] = useState<Place[]>(() => [
+    createEmptyTicket(),
+  ])
+
+  const tickets = useMemo(
+    () =>
+      orderContext.selectedPlaces.length
+        ? [...orderContext.selectedPlaces, ...emptyTickets]
+        : emptyTickets,
+    [orderContext.selectedPlaces, emptyTickets],
+  )
 
   const syncTickets = (updatedTickets: Place[]) => {
-    setTickets(updatedTickets)
-    orderContext.setSelectedPlaces(updatedTickets.filter(isTicketFullySelected))
+    const fullySelected = updatedTickets.filter(isTicketFullySelected)
+    const empty = updatedTickets.filter((t) => !isTicketFullySelected(t))
+
+    orderContext.setSelectedPlaces(fullySelected)
+    setEmptyTickets(
+      empty.length ? empty : fullySelected.length ? [] : [createEmptyTicket()],
+    )
   }
 
   const groupedPlacesByRow = useMemo(
@@ -39,7 +54,7 @@ export const useChoosePlaceStepMobileView = () => {
   const hallName = translateHall(orderContext.seance.hall.name)
 
   const addTicket = () => {
-    setTickets((prev) => [...prev, createEmptyTicket()])
+    setEmptyTickets((prev) => [...prev, createEmptyTicket()])
   }
 
   const removeTicket = (id: string) => {
