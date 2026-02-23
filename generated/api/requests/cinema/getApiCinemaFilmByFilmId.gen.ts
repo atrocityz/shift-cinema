@@ -18,6 +18,6 @@ export const getApiCinemaFilmByFilmId = ({
 }: GetApiCinemaFilmByFilmIdRequestParams) =>
   instance.request<CinemaControllerGetFilmResponse>({
     method: 'GET',
-    url: `/api/cinema/film/${path.filmId}`,
+    url: `/cinema/film/${path.filmId}`,
     ...config,
   })

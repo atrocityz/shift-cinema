@@ -17,6 +17,6 @@ export const getApiCinemaOrders = ({
 }: GetApiCinemaOrdersRequestParams = {}) =>
   instance.request<CinemaControllerGetCinemaOrdersResponse>({
     method: 'GET',
-    url: '/api/cinema/orders',
+    url: '/cinema/orders',
     ...config,
   })

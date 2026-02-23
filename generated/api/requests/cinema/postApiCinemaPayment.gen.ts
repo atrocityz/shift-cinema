@@ -18,7 +18,7 @@ export const postApiCinemaPayment = ({
 }: PostApiCinemaPaymentRequestParams) =>
   instance.request<CinemaControllerCreateCinemaPaymentResponse>({
     method: 'POST',
-    url: '/api/cinema/payment',
+    url: '/cinema/payment',
     data: body,
     ...config,
   })

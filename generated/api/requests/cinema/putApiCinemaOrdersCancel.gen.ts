@@ -18,7 +18,7 @@ export const putApiCinemaOrdersCancel = ({
 }: PutApiCinemaOrdersCancelRequestParams) =>
   instance.request<CinemaControllerCancelCinemaOrderResponse>({
     method: 'PUT',
-    url: '/api/cinema/orders/cancel',
+    url: '/cinema/orders/cancel',
     data: body,
     ...config,
   })

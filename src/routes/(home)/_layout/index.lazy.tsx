@@ -21,4 +21,3 @@ const MainPage = () => {
 export const Route = createLazyFileRoute('/(home)/_layout/')({
   component: MainPage,
 })
-

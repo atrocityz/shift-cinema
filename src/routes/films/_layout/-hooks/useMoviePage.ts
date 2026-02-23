@@ -15,7 +15,7 @@ export const useMoviePage = () => {
 
   const formattedFilm = {
     ...filmResponse.data.film,
-    img: `${import.meta.env.VITE_BASE_API_URL}/api/${filmResponse.data.film.img}`,
+    img: `${import.meta.env.VITE_BASE_API_URL}${filmResponse.data.film.img}`,
   }
 
   const onTimeSelect = (
