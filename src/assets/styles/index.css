@@ -61,7 +61,7 @@
   --border-medium: theme(--color-gray-500);
 
   /* Indicator */
-  --indicator-focused: theme(--color-purple-300);
+  --indicator-focused: var(--brand);
   --indicator-focused-alternative: theme(--color-purple-100);
   --indicator-white: theme(--color-white-0);
   --indicator-light: theme(--color-gray-400);
