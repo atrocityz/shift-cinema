@@ -1,5 +1,7 @@
+import type { PatternFormatProps } from 'react-number-format'
+
 import * as React from 'react'
-import { IMaskMixin } from 'react-imask'
+import { PatternFormat } from 'react-number-format'
 
 import { cn } from '@/utils/lib'
 
@@ -23,10 +25,31 @@ const Input = ({
   )
 }
 
-const MaskedPhoneInput = IMaskMixin(
-  ({ ref, ...props }: React.ComponentProps<'input'>) => {
-    return <Input ref={ref} {...props} />
-  },
-)
+interface MaskedPhoneInputProps extends Omit<
+  PatternFormatProps,
+  'format' | 'onChange'
+> {
+  onChange?: (value: string) => void
+}
+
+const MaskedPhoneInput = ({
+  onChange,
+  className,
+  ...props
+}: MaskedPhoneInputProps) => {
+  return (
+    <PatternFormat
+      className={className}
+      mask="_"
+      allowEmptyFormatting={false}
+      customInput={Input}
+      format="+7 (###) ###-##-##"
+      onValueChange={(values) => {
+        onChange?.(values.value)
+      }}
+      {...props}
+    />
+  )
+}
 
 export { Input, MaskedPhoneInput }

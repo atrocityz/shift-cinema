@@ -116,17 +116,11 @@ export const ProfileDataStep = () => {
                   <MaskedPhoneInput
                     aria-invalid={isInvalid}
                     id={field.name}
-                    lazy={false}
-                    mask="+{7} 000-000-00-00"
                     name={field.name}
-                    type="tel"
-                    unmask={true}
                     value={field.state.value}
-                    autoComplete="off"
-                    onAccept={(value: string) => field.handleChange(value)}
                     onBlur={field.handleBlur}
-                    overwrite
-                    placeholder="+7 913 123 45 67"
+                    onChange={(val) => field.handleChange(val)}
+                    placeholder="+7 (123) 123-12-31"
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>

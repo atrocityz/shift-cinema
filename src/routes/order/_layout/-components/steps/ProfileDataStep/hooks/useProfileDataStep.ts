@@ -24,9 +24,17 @@ export const useProfileDataStep = () => {
         firstname: values.value.firstName,
         lastname: values.value.lastName,
         middlename: values.value.middleName,
-        phone: values.value.phoneNumber,
+        phone: `8${values.value.phoneNumber}`,
       })
       orderContext.setStep('payment')
+    },
+
+    onSubmitInvalid() {
+      const InvalidInput = document.querySelector(
+        '[aria-invalid="true"]',
+      ) as HTMLInputElement
+
+      InvalidInput?.focus()
     },
   })
 

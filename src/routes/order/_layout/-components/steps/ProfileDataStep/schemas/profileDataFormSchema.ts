@@ -12,8 +12,8 @@ export const profileDataFormSchema = z.object({
     .min(2, { message: 'Отчество обязательно' }),
   phoneNumber: z
     .string({ error: 'Номер телефона должен быть строкой' })
-    .regex(/^7\d{10}$/, {
-      message: 'Введите номер в формате +7 999-999-99-99',
+    .regex(/\d{10}$/, {
+      message: 'Неверно введен номер телефона',
     }),
 })
 
